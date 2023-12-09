@@ -31,8 +31,6 @@ class RunningsController < ApplicationController
     end
   end
 
-  
-  
   private
 
   def running_params
