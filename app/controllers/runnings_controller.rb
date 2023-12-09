@@ -3,7 +3,18 @@ class RunningsController < ApplicationController
     @runnings = Running.all
     @running = Running.new
   end
-  
+
+  def json_index
+    @monthly_data = Running.group("DATE_FORMAT(created_at, '%Y-%m')").select("DATE_FORMAT(created_at, '%m') AS month, SUM(ran_distance) AS distance").order("month").map { |record| [record.month.to_i, record.distance] }
+
+    distances = @monthly_data.map { |data| data[1] }
+    month = @monthly_data.map { |data| data[0] }
+
+    respond_to do |format|
+      format.json { render json: { distances: distances, months: month } }
+    end
+  end
+
   def create
     @running = Running.new(running_params)
     if @running.save
@@ -20,8 +31,6 @@ class RunningsController < ApplicationController
     end
   end
 
-  
-  
   private
 
   def running_params
