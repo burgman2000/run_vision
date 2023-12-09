@@ -1,0 +1,10 @@
+<h1>RunVision</h1>
+
+<div style="width: 400px; height: 400px;">
+  <canvas id="myChart"></canvas>
+</div>
+
+<%= form_with(model: @running, url: runnings_path, id: "form") do |form| %>
+  <%= form.text_field :ran_distance, id: "ran-distance" %> <br>
+  <%= form.submit "投稿する", id: "submit" %>
+<% end %>
