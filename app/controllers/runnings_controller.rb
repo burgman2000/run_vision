@@ -9,10 +9,10 @@ class RunningsController < ApplicationController
       .select("DATE_FORMAT(created_at, '%Y-%m') AS month, SUM(ran_distance) AS distance")
       .order("month")
       .map { |record| [record.month, record.distance] }
-  
+
     distances = @monthly_data.map { |data| data[1] }
     months = @monthly_data.map { |data| data[0] }
-  
+
     respond_to do |format|
       format.json { render json: { distances: distances, months: months } }
     end
