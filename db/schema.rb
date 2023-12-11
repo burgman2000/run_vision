@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_07_002227) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_11_111903) do
+  create_table "events", charset: "utf8", force: :cascade do |t|
+    t.string "event_name", null: false
+    t.integer "target_distance", null: false
+    t.integer "period", null: false
+    t.text "commit", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "runnings", charset: "utf8", force: :cascade do |t|
     t.integer "ran_distance", null: false
     t.datetime "created_at", null: false
