@@ -53,3 +53,11 @@ production:
   database: run_vision_production
   username: run_vision
   password: <%= ENV["RUN_VISION_DATABASE_PASSWORD"] %>
+
+  production:
+  <<: *default
+  adapter: mysql2
+  database: run_vision_production
+  username: root
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  socket: /var/lib/mysql/mysql.sock
