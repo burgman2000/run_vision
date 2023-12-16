@@ -19,6 +19,45 @@
 
 
 
+
+
+
+##  runnings  テーブル
+
+| Column             | Type      | Options     |
+| ------------------ | ------    | ----------- |
+| user_id            | references| null: false , foreign_key: true |
+| ran_distance       | integer   | null: false           |
+| ran_location       | text      | null: false           |
+| impression         | text      | null: false |
+| date               | date      | null: false |
+
+
+### Association
+- belongs_to :user
+- has_many :comments
+
+
+
+
+
+##   comments   テーブル
+
+| Column             | Type      | Options     |
+| ------------------ | ------    | ----------- |
+| user_id            | references| null: false, foreign_key: true |
+| running_id         | references| null: false, foreign_key: true |
+| text               | text      | null: false |
++----------------------------------------+
+
+### Association
+- belongs_to :user
+- belongs_to :running
+
+
+
+
+
 ##  events  テーブル
 
 | Column             | Type      | Options     |
@@ -36,39 +75,6 @@
 
 
 
-
-
-##  runnings  テーブル
-
-| Column             | Type      | Options     |
-| ------------------ | ------    | ----------- |
-| user_id            | references| null: false , foreign_key: true |
-| ran_distance       | integer   | null: false           |
-| ran_location       | text      | null: false           |
-| impression         | text      | null: false |
-| date               | integer   | null: false |
-
-
-### Association
-- belongs_to :user
-- has_many :comments
-
-
-
-
-
-##   comments   テーブル
-
-| Column             | Type      | Options     |
-| ------------------ | ------    | ----------- |
-| user_id            | references| null: false, foreign_key: true |
-| running_id         | references| null: false, foreign_key: true |
-| comment            | text      | null: false, foreign_key: true |
-+----------------------------------------+
-
-### Association
-- belongs_to :user
-- belongs_to :running
 
 
 

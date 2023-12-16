@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_16_024835) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_16_025932) do
+  create_table "comments", charset: "utf8", force: :cascade do |t|
+    t.bigint "user_id_id", null: false
+    t.bigint "running_id_id", null: false
+    t.text "comment", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["running_id_id"], name: "index_comments_on_running_id_id"
+    t.index ["user_id_id"], name: "index_comments_on_user_id_id"
+  end
+
   create_table "events", charset: "utf8", force: :cascade do |t|
     t.string "event_name", null: false
     t.integer "target_distance", null: false
@@ -21,9 +31,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_16_024835) do
   end
 
   create_table "runnings", charset: "utf8", force: :cascade do |t|
+    t.bigint "user_id_id", null: false
     t.integer "ran_distance", null: false
+    t.text "ran_location", null: false
+    t.text "impression", null: false
+    t.date "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id_id"], name: "index_runnings_on_user_id_id"
   end
 
   create_table "users", charset: "utf8", force: :cascade do |t|
