@@ -1,11 +1,25 @@
 <h1>RunVision</h1>
-
+<p>今日の日付：◯月◯日</p>
+<p>目標距離：100km</p>
+<p>走った距離：25km</p>
+<p>達成率：25%</p>
+<p>残り日数：30日</p>
+<p>残りの距離：75km</p>
 
 <div style="width: 400px; height: 400px;">
   <canvas id="myChart"></canvas>
 </div>
 
+<p>日付：</p>
 <%= form_with(model: @running, url: runnings_path, id: "form") do |form| %>
-  <%= form.text_field :ran_distance, id: "ran-distance" %> <br>
+<p>走った距離：</p>
+  <%= form.text_field :ran_distance, id: "ran-distance" %> <br>km
   <%= form.submit "投稿する", id: "submit" %>
 <% end %>
+
+<p>走った場所：</p>
+<p>感想：</p>
+<p>コメントフォーム</p>
+<p>送信</p>
+
+
