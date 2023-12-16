@@ -25,12 +25,15 @@
 | ------------------ | ------    | ----------- |
 | event_name         | string    | null: false |
 | target_distance    | integer   | null: false |
-| period             | integer   | null: false |
+| start_date         | date      | null: false |
+| end_date           | date      | null: false |
 | commit             | text      | null: false |
 | user               | references| null: false , foreign_key: true |
 
+
 ### Association
-なし※アクセスはBASIC認証をする
+
+
 
 
 
@@ -66,6 +69,9 @@
 ### Association
 - belongs_to :user
 - belongs_to :running
+
+
+
 
 
 
