@@ -1,4 +1,5 @@
 class Running < ApplicationRecord
   belongs_to :user
-  has_many :comments
+- belongs_to :event
+- has_many :comments
 end

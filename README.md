@@ -35,6 +35,7 @@
 
 ### Association
 - belongs_to :user
+- belongs_to :event
 - has_many :comments
 
 
@@ -67,10 +68,10 @@
 | start_date         | date      | null: false |
 | end_date           | date      | null: false |
 | commit             | text      | null: false |
-| user_id            | references| null: false , foreign_key: true |
 
 
 ### Association
+- belongs_to :running
 
 
 
