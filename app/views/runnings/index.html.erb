@@ -7,11 +7,11 @@
 <p>残りの距離：75km</p>
 
 <div style="width: 400px; height: 400px;">
-  <canvas id="myChart"></canvas>
+  <canvas id="myChart"></canvas> <%# チャートを表示させている %>
 </div>
 
 <p>日付：</p>
-<%= form_with(model: @running, url: runnings_path, id: "form") do |form| %>
+<%= form_with(model: @running, url: runnings_path, id: "form") do |form| %><%# railsで数字を送っている %>
 <p>走った距離：</p>
   <%= form.text_field :ran_distance, id: "ran-distance" %> <br>km
   <%= form.submit "投稿する", id: "submit" %>

@@ -1,14 +1,15 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => { //DOM（HTMLで構成されている要素）が読み込まれた場合、→画面がリロードされたとき
   // 初期データを取得してグラフを描画
-  updateChart();
+  updateChart(); //関数が実行される。railsの方のサーバー・running.json.indexのURLにアクセスをして、データを取得する
+  //これをjsonという形式にデータにして、チャートに表示する
 
   const form = document.getElementById("form");
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  form.addEventListener("submit", async (e) => { //
+    e.preventDefault(); //デフォルトの処理を一旦止める
     const ranDistance = document.getElementById("ran-distance").value;
 
     // データをサーバーに送信
-    const response = await fetch("/runnings", {
+    const response = await fetch("/runnings", {// response = { "distances": [20, 30, 40, 50, 60], "months": ["2023-11", "2023-12", "2024-01", "2024-02", "2024-03"]}
       method: "POST",
       headers: {
         "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]')
@@ -39,12 +40,12 @@ async function updateChart() {
 let myChart;
 
 function drawChart(data) {
-  const ctx = document.getElementById("myChart").getContext("2d");
+  const ctx = document.getElementById("myChart").getContext("2d");// <canvas id="myChart"></canvas>
 
   if (myChart) {
     // すでにチャートが存在する場合は、データを更新する
-    myChart.data.labels = data.months;
-    myChart.data.datasets[0].data = data.distances;
+    myChart.data.labels = data.months; //ラベル：月 // data = { "distances": [20, 30, 40, 50, 60], "months": ["2023-11", "2023-12", "2024-01", "2024-02", "2024-03"]}
+    myChart.data.datasets[0].data = data.distances; //データ：距離
 
     myChart.update();
   } else {
@@ -52,10 +53,10 @@ function drawChart(data) {
     myChart = new Chart(ctx, {
       type: "pie",
       data: {
-        labels: data.months,
+        labels: data.months,// data = { "distances": [20, 30, 40, 50, 60], "months": ["2023-11", "2023-12", "2024-01", "2024-02", "2024-03"]}
         datasets: [
           {
-            data: data.distances,
+            data: data.distances,// [20, 30, 40, 50, 60]
             backgroundColor: [
               "rgba(255, 99, 132, 0.7)",
               "rgba(54, 162, 235, 0.7)",
