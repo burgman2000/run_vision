@@ -1,11 +1,10 @@
-document.addEventListener("DOMContentLoaded", () => { //DOM（HTMLで構成されている要素）が読み込まれた場合、→画面がリロードされたとき
+document.addEventListener("DOMContentLoaded", () => { 
   // 初期データを取得してグラフを描画
-  updateChart(); //関数が実行される。railsの方のサーバー・running.json.indexのURLにアクセスをして、データを取得する
-  //これをjsonという形式にデータにして、チャートに表示する
+  updateChart(); 
 
   const form = document.getElementById("form");
-  form.addEventListener("submit", async (e) => { //
-    e.preventDefault(); //デフォルトの処理を一旦止める
+  form.addEventListener("submit", async (e) => { 
+    e.preventDefault(); 
     const ranDistance = document.getElementById("ran-distance").value;
 
     // データをサーバーに送信

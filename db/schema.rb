@@ -32,14 +32,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_16_025932) do
   end
 
   create_table "runnings", charset: "utf8", force: :cascade do |t|
-    t.bigint "user_id_id", null: false
     t.integer "ran_distance", null: false
     t.text "ran_location", null: false
     t.text "impression", null: false
     t.date "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id_id"], name: "index_runnings_on_user_id_id"
   end
 
   create_table "users", charset: "utf8", force: :cascade do |t|
