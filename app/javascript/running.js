@@ -43,8 +43,8 @@ function drawChart(data) {
 
   if (myChart) {
     // すでにチャートが存在する場合は、データを更新する
-    myChart.data.labels = data.months; //ラベル：月 // data = { "distances": [20, 30, 40, 50, 60], "months": ["2023-11", "2023-12", "2024-01", "2024-02", "2024-03"]}
-    myChart.data.datasets[0].data = data.distances; //データ：距離
+    myChart.data.labels = data.months;  //user_name//ラベル：月 // data = { "distances": [20, 30, 40, 50, 60], "months": ["2023-11", "2023-12", "2024-01", "2024-02", "2024-03"]}
+    myChart.data.datasets[0].data = data.distances; //by_user_distances//データ：距離
 
     myChart.update();
   } else {
