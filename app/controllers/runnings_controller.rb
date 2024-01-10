@@ -27,7 +27,7 @@ class RunningsController < ApplicationController
         format.json { render json: { running: @running } } #データを返す
       end
     else
-      Rails.logger.debug("falseになる場合のテスト")
+      Rails.logger.debug
       @runnings = Running.all
       respond_to do |format|
         format.html { render :index, status: :unprocessable_entity }

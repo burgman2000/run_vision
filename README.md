@@ -27,6 +27,7 @@
 | Column             | Type      | Options     |
 | ------------------ | ------    | ----------- |
 | user_id            | references| null: false , foreign_key: true |
+| event_id           | references| null: false , foreign_key: true |
 | ran_distance       | integer   | null: false           |
 | ran_location       | text      | null: false           |
 | impression         | text      | null: false |
