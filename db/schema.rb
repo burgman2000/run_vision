@@ -34,9 +34,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_16_025932) do
   create_table "runnings", charset: "utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "ran_distance", null: false
-    t.text "ran_location", null: false
-    t.text "impression", null: false
-    t.date "date", null: false
+    t.text "ran_location"
+    t.text "impression"
+    t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_runnings_on_user_id"
