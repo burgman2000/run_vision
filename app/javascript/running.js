@@ -42,8 +42,8 @@ function drawChart(data) {
 
   if (myChart) {
     // すでにチャートが存在する場合は、データを更新する
-    myChart.data.labels = data.months;  //user_name//ラベル：月 // data = { "distances": [20, 30, 40, 50, 60], "months": ["2023-11", "2023-12", "2024-01", "2024-02", "2024-03"]}
-    myChart.data.datasets[0].data = data.distances; //by_user_distances//データ：距離
+    myChart.data.labels = data.user_name;  //user_name//ラベル：月 // data = { "distances": [20, 30, 40, 50, 60], "months": ["2023-11", "2023-12", "2024-01", "2024-02", "2024-03"]}
+    myChart.data.datasets[0].data = data.by_user_distances; //by_user_distances//データ：距離
 
     myChart.update();
   } else {
@@ -51,10 +51,10 @@ function drawChart(data) {
     myChart = new Chart(ctx, {
       type: "pie",
       data: {
-        labels: data.months,// data = { "distances": [20, 30, 40, 50, 60], "months": ["2023-11", "2023-12", "2024-01", "2024-02", "2024-03"]}
+        labels: data.user_name,// data = { "distances": [20, 30, 40, 50, 60], "months": ["2023-11", "2023-12", "2024-01", "2024-02", "2024-03"]}
         datasets: [
           {
-            data: data.distances,// [20, 30, 40, 50, 60]
+            data: data.by_user_distances,// [20, 30, 40, 50, 60]
             backgroundColor: [
               "rgba(255, 99, 132, 0.7)",
               "rgba(54, 162, 235, 0.7)",
