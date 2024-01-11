@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => { 
   // 初期データを取得してグラフを描画
-  updateChart(); 
+  updateChart();
 
   const form = document.getElementById("form");
-  form.addEventListener("submit", async (e) => { 
-    e.preventDefault(); 
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
     const ranDistance = document.getElementById("ran-distance").value;
     // データをサーバーに送信
     const response = await fetch("/runnings", {// response = { "distances": [20, 30, 40, 50, 60], "months": ["2023-11", "2023-12", "2024-01", "2024-02", "2024-03"]}
