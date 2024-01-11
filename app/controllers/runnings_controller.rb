@@ -5,7 +5,8 @@ class RunningsController < ApplicationController
   end
 
   def json_index  
-    @monthly_data = Running.group("DATE_FORMAT(created_at, '%Y-%m')") # 2023-11 = month, 20 = distance #DBで取得したデータ
+    @monthly_data = Running.group("DATE_FORMAT(ran_distance, user_id)") # 2023-11 = month, 20 = distance #DBで取得したデータ
+      User.joins(:runnings).select(run_distance)
       .select("DATE_FORMAT(ran_distance, user_id) AS month, SUM(ran_distance) AS distance") #DBのどのカラムをつかうのか　少し加工している
       .order("month")
       .map { |record| [record.month, record.distance] } #map→必要なデータだけを配列に直すメソッド @monthly_data = [["2023-11", 20], ["2023-12", 30].....]
