@@ -15,8 +15,8 @@ class RunningsController < ApplicationController
     months = @monthly_data.map { |data| data[0] }#user_name_data =  @monthly_data.map{}["test1","test2","test3"]   #0はmonth# ["2023-11", "2023-12", "2024-01", "2024-02", "2024-03"]
 # { "distances": [20, 30, 40, 50, 60], "months": ["2023-11", "2023-12", "2024-01", "2024-02", "2024-03"]}
 
-    respond_to do |format|  #
-      format.json { render json: { distances: distances, months: months } } #json: {byuser_distances: byuser_distances_data, user_name: user_name_data }
+    respond_to do |format|
+      format.json { render json: { byuser_distances: byuser_distances_data, user_name: user_name_data } } 
     end
   end
 
