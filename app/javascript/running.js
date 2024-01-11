@@ -43,7 +43,9 @@ function drawChart(data) {
   if (myChart) {
     // すでにチャートが存在する場合は、データを更新する
     myChart.data.labels = data.user_name;  //user_name//ラベル：月 // data = { "distances": [20, 30, 40, 50, 60], "months": ["2023-11", "2023-12", "2024-01", "2024-02", "2024-03"]}
+    console.log(data.user_name);
     myChart.data.datasets[0].data = data.by_user_distances; //by_user_distances//データ：距離
+    console.log(data.by_user_distances);
 
     myChart.update();
   } else {
