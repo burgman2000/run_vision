@@ -9,7 +9,7 @@ class RunningsController < ApplicationController
       User.joins(:runnings).select(run_distance)
       .select("DATE_FORMAT(ran_distance, user_id) AS month, SUM(ran_distance) AS distance") #DBのどのカラムをつかうのか　少し加工している
       .order("month")
-      .map { |record| [record.month, record.distance] } #map→必要なデータだけを配列に直すメソッド @monthly_data = [["2023-11", 20], ["2023-12", 30].....]
+      .map { |record| [record.by_user_distance_data, record.user_name_data] }#map→必要なデータだけを配列に直すメソッド @monthly_data = [["2023-11", 20], ["2023-12", 30].....]
 
     distances = @monthly_data.map { |data| data[1] }#byuser_distances_data = @monthly_data.map{}[20,30,40]       #1はdistance# [20, 30, 40, 50, 60]
     months = @monthly_data.map { |data| data[0] }#user_name_data =  @monthly_data.map{}["test1","test2","test3"]   #0はmonth# ["2023-11", "2023-12", "2024-01", "2024-02", "2024-03"]
