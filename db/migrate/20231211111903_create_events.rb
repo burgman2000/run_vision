@@ -3,7 +3,8 @@ class CreateEvents < ActiveRecord::Migration[7.0]
     create_table :events do |t|
       t.string :event_name, null: false
       t.integer :target_distance, null: false
-      t.integer :period, null: false
+      t.date :start_date, null: false
+      t.date :end_date, null: false
       t.text :commit, null: false
 
 

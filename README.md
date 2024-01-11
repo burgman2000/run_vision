@@ -19,22 +19,6 @@
 
 
 
-##  events  テーブル
-
-| Column             | Type      | Options     |
-| ------------------ | ------    | ----------- |
-| event_name         | string    | null: false |
-| target_distance    | integer   | null: false |
-| start_date         | date      | null: false |
-| end_date           | date      | null: false |
-| commit             | text      | null: false |
-| user               | references| null: false , foreign_key: true |
-
-
-### Association
-
-
-
 
 
 
@@ -42,15 +26,17 @@
 
 | Column             | Type      | Options     |
 | ------------------ | ------    | ----------- |
-| user               | references| null: false , foreign_key: true |
+| user_id            | references| null: false , foreign_key: true |
+| event_id           | references| null: false , foreign_key: true |
 | ran_distance       | integer   | null: false           |
 | ran_location       | text      | null: false           |
 | impression         | text      | null: false |
-| date               | integer   | null: false |
+| date               | date      | null: false |
 
 
 ### Association
 - belongs_to :user
+- belongs_to :event
 - has_many :comments
 
 
@@ -61,14 +47,36 @@
 
 | Column             | Type      | Options     |
 | ------------------ | ------    | ----------- |
-| user               | references| null: false, foreign_key: true |
-| running            | references| null: false, foreign_key: true |
-| comment            | text      | null: false, foreign_key: true |
+| user_id            | references| null: false, foreign_key: true |
+| running_id         | references| null: false, foreign_key: true |
+| text               | text      | null: false |
 +----------------------------------------+
 
 ### Association
 - belongs_to :user
 - belongs_to :running
+
+
+
+
+
+##  events  テーブル
+
+| Column             | Type      | Options     |
+| ------------------ | ------    | ----------- |
+| event_name         | string    | null: false |
+| target_distance    | integer   | null: false |
+| start_date         | date      | null: false |
+| end_date           | date      | null: false |
+| commit             | text      | null: false |
+
+
+### Association
+- belongs_to :running
+
+
+
+
 
 
 

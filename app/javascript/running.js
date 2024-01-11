@@ -1,21 +1,20 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => { 
   // 初期データを取得してグラフを描画
-  updateChart();
+  updateChart(); 
 
   const form = document.getElementById("form");
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  form.addEventListener("submit", async (e) => { 
+    e.preventDefault(); 
     const ranDistance = document.getElementById("ran-distance").value;
-
     // データをサーバーに送信
-    const response = await fetch("/runnings", {
+    const response = await fetch("/runnings", {// response = { "distances": [20, 30, 40, 50, 60], "months": ["2023-11", "2023-12", "2024-01", "2024-02", "2024-03"]}
       method: "POST",
       headers: {
         "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]')
           .content,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ running: { ran_distance: ranDistance } }),
+      body: JSON.stringify({ running: { ran_distance: Number(ranDistance) } }),
     });
 
     if (response.ok) {
@@ -39,12 +38,12 @@ async function updateChart() {
 let myChart;
 
 function drawChart(data) {
-  const ctx = document.getElementById("myChart").getContext("2d");
+  const ctx = document.getElementById("myChart").getContext("2d");// <canvas id="myChart"></canvas>
 
   if (myChart) {
     // すでにチャートが存在する場合は、データを更新する
-    myChart.data.labels = data.months;
-    myChart.data.datasets[0].data = data.distances;
+    myChart.data.labels = data.months;  //user_name//ラベル：月 // data = { "distances": [20, 30, 40, 50, 60], "months": ["2023-11", "2023-12", "2024-01", "2024-02", "2024-03"]}
+    myChart.data.datasets[0].data = data.distances; //by_user_distances//データ：距離
 
     myChart.update();
   } else {
@@ -52,10 +51,10 @@ function drawChart(data) {
     myChart = new Chart(ctx, {
       type: "pie",
       data: {
-        labels: data.months,
+        labels: data.months,// data = { "distances": [20, 30, 40, 50, 60], "months": ["2023-11", "2023-12", "2024-01", "2024-02", "2024-03"]}
         datasets: [
           {
-            data: data.distances,
+            data: data.distances,// [20, 30, 40, 50, 60]
             backgroundColor: [
               "rgba(255, 99, 132, 0.7)",
               "rgba(54, 162, 235, 0.7)",
