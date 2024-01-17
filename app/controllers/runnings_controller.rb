@@ -5,15 +5,14 @@ class RunningsController < ApplicationController
   end
 
   def json_index  
-    @monthly_data = Running.group(:user_id) # 2023-11 = month, 20 = distance #DBで取得したデータ
+    @monthly_data = Running.group(:user_id) 
       # User.joins(:runnings).select(ran_distance)
       .select("user_id, SUM(ran_distance) AS distance") #select取得する
       .order(:user_id)
       .map { |record| [record.user_id, record.distance] }#map→必要なデータだけを配列に直すメソッド @monthly_data = [["2023-11", 20], ["2023-12", 30].....]
 
-    by_user_distances_data = @monthly_data.map { |data| data[1] }#ここでjson名を定義！   by_user_distances_data = @monthly_data.map{}[20,30,40]       #1はdistance# [20, 30, 40, 50, 60]
-    Rails.logger.debug(@monthly_data.map { |data| data[1] })
-    user_name_data = @monthly_data.map { |data| data[0] }#user_name_data =  @monthly_data.map{}["test1","test2","test3"]   #0はuser# ["test1","test2","test3"] 
+    by_user_distances_data = @monthly_data.map { |data| data[1] }#ここでjson名を定義！   
+    user_name_data = @monthly_data.map { |data| data[0] } #0はuser# ["test1","test2","test3"] 
 
     respond_to do |format|
       format.json { render json: { by_user_distances: by_user_distances_data, user_name: user_name_data } } 
@@ -28,7 +27,6 @@ class RunningsController < ApplicationController
         format.json { render json: { running: @running } } #データを返す
       end
     else
-      Rails.logger.debug
       @runnings = Running.all
       respond_to do |format|
         format.html { render :index, status: :unprocessable_entity }
