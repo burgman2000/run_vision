@@ -21,7 +21,7 @@ class RunningsController < ApplicationController
 
   def create
     @running = Running.new(running_params) #ログインしているuserIDを入れる デバイス　ログイン機能→userIDを取得するメソットcurrent.user？
-    if @running.save
+    if @running.save!
       respond_to do |format|
         format.html { redirect_to root_path } #画面を表示
         format.json { render json: { running: @running } } #データを返す
