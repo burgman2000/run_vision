@@ -1,3 +1,3 @@
 class Event < ApplicationRecord
-  # あとでアソシエーション//
+  has_many :runnings
 end
