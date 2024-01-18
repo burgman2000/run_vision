@@ -2,6 +2,7 @@ class RunningsController < ApplicationController
   def index
     @runnings = Running.all
     @running = Running.new
+    @events = Event.all
   end
 
   def json_index  
@@ -38,6 +39,6 @@ class RunningsController < ApplicationController
   private
 
   def running_params
-    params.require(:running).permit(:ran_distance).merge(user_id: current_user.id)
+    params.require(:running).permit(:ran_distance).merge(user_id: current_user.id, event_id: params[:event_id])
   end
 end
