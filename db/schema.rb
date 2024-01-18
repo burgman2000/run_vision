@@ -59,5 +59,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_16_025932) do
 
   add_foreign_key "comments", "runnings", on_update: :cascade, on_delete: :cascade
   add_foreign_key "comments", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "runnings", "events", on_update: :cascade, on_delete: :cascade
   add_foreign_key "runnings", "users", on_update: :cascade, on_delete: :cascade
 end
