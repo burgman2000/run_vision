@@ -1,5 +1,6 @@
 <h1>RunVision</h1>
 <% if user_signed_in? %>
+<%= current_user.nickname %> <%# ログインユーザーの表示 %>
 ログインしています。
 <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete } %>
 
@@ -14,6 +15,16 @@
 <p>達成率：25%</p>
 <p>残り日数：30日</p>
 <p>残りの距離：75km</p>
+
+<%# ログインユーザーの名前　　　　　　　　　　　→<%= "/users/#{current_user.id}" %>
+<%# 本日の日付：◯月◯日
+目標名「かつしかランニングフェスタに向けて」　→event_name☆
+目標距離	150km 　　　　　　              →target_distance ☆
+期間 「1/1〜2/10」　                    →start_date☆　end_date☆
+走った距離	 　　　　　　　　　　　　→
+達成率〇〇％　             　　　　　　　 →　(走った合計距離20km / 目標100km ) * 100 
+残り日数：
+残り	50km　　　　　　　　　　　　　　　　→target_distance  -  走った合計距離 %> 
 
 <div style="width: 400px; height: 400px;">
   <canvas id="myChart"></canvas>
