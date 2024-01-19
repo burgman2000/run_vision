@@ -9,9 +9,9 @@
 <%=link_to "ログイン", new_user_session_path%>
 <% end %>
 
-<%# <% @events.each do |event| %> 
+
 <p>今日の日付：◯月◯日</p>
-<%# <%= event.event_name %> 
+<%= @event.event_name %> 
 <p>目標名</p> 
 <p>目標距離：100km</p> <%# →target_distance ☆ %>
 <p> 期間 「1/1〜2/10」<p><%# →start_date☆　end_date☆ %>
@@ -30,6 +30,9 @@
 <p>走った距離：</p>
   <%= form.number_field :ran_distance, id: "ran-distance" %> <br>km
   <%= form.submit "投稿する", id: "submit" %>
+  <%= form.hidden_field :event_id, id: "event-id", :value => @event.id %> 
+  
+
 <% end %>
 
 <p>走った場所：</p>

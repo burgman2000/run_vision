@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const ranDistance = document.getElementById("ran-distance").value;
+    const eventId = document.getElementById("event-id").value;
     // データをサーバーに送信
     const response = await fetch("/runnings", {// response = { "distances": [20, 30, 40, 50, 60], "months": ["2023-11", "2023-12", "2024-01", "2024-02", "2024-03"]}
       method: "POST",
@@ -14,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
           .content,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ running: { ran_distance: Number(ranDistance) } }),
+      body: JSON.stringify({ running: { ran_distance: Number(ranDistance), event_id: Number(eventId)} }),
     });
 
     if (response.ok) {
