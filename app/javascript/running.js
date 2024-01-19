@@ -68,7 +68,7 @@ function drawChart(data) {
               chart.data.labels[index] +
               `\r\n` +
               dataset.data[index].toString() +
-              "分";
+              "km";
 
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
