@@ -51,6 +51,7 @@ function drawChart(data) {
     myChart.update();
   } else {
     // チャートを新規作成する場合
+    // <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0 "></script>
     myChart = new Chart(ctx, {
       type: "pie",
       data: {
@@ -76,6 +77,7 @@ function drawChart(data) {
           },
         ],
       },
+      // plugins: [ChartDataLabels],
       options: {
         responsive: true,
         maintainAspectRatio: false,
