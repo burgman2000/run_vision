@@ -15,10 +15,12 @@
 <p>目標名：<%= @event.event_name %> </p> 
 <p>目標距離：<%= @event.target_distance %> km</p> 
 <p> 期間 「<%= @event.start_date %> 〜<%= @event.end_date %> 」<p>
-<p>走った距離：25km</p>
-<p>達成率：25%</p>
+<p>走った距離：25km</p><%# @runnings.ran_distance?? %>
+<p>達成率：25%</p><%# (走った合計距離20km / 目標100km ) * 100  %>
 <p>残り日数：30日</p>
-<p>残りの距離：75km</p>
+<p>残りの距離：75km</p><%# →target_distance  -  走った合計距離 %>
+
+
 
 
 
