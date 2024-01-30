@@ -1,16 +1,22 @@
 class RunningsController < ApplicationController
   def index
     @event = Event.order(created_at: :desc).first 
-    @runnings = Running.where(event_id: @event.id) 
-    @running = Running.new    
+    @runnings = Running.where(event_id: @event.id)
+    @ran_distance_sum = @runnings.sum(:ran_distance) #＜左辺＞合計値を入れる変数名 、＜右辺＞合計を取得
+    @rate_achievement = (@ran_distance_sum.to_f  / @event.target_distance) * 100  #<左辺>　＜右辺＞計算で達成率を表示
+    @days_remaining = (@event.end_date - Date.today).numerator
+    @remaining_distance = @event.target_distance - @ran_distance_sum
+    @running = Running.new
+    # Rails.logger.debug(@ran_distance_sum / @event.target_distance)
   end
 
   def json_index  
-    @monthly_data = Running.group(:user_id) 
+    @monthly_data = Running.group(:user_id)
+      .joins(:user)
       # User.joins(:runnings).select(ran_distance)
-      .select("user_id, SUM(ran_distance) AS distance") #select取得する
+      .select("users.nickname AS nickname, SUM(runnings.ran_distance) AS distance") #select取得する
       .order(:user_id)
-      .map { |record| [record.user_id, record.distance] }#map→必要なデータだけを配列に直すメソッド @monthly_data = [["2023-11", 20], ["2023-12", 30].....]
+      .map { |record| [record.nickname, record.distance] }#map→必要なデータだけを配列に直すメソッド @monthly_data = [["2023-11", 20], ["2023-12", 30].....]
 
     by_user_distances_data = @monthly_data.map { |data| data[1] }#ここでjson名を定義！   
     user_name_data = @monthly_data.map { |data| data[0] } #0はuser# ["test1","test2","test3"] 
