@@ -1,33 +1,39 @@
 class RunningsController < ApplicationController
   def index
-    @runnings = Running.all
+    @event = Event.order(created_at: :desc).first 
+    @runnings = Running.where(event_id: @event.id)
+    @ran_distance_sum = @runnings.sum(:ran_distance) #＜左辺＞合計値を入れる変数名 、＜右辺＞合計を取得
+    @rate_achievement = (@ran_distance_sum.to_f  / @event.target_distance) * 100  #<左辺>　＜右辺＞計算で達成率を表示
+    @days_remaining = (@event.end_date - Date.today).numerator
+    @remaining_distance = @event.target_distance - @ran_distance_sum
     @running = Running.new
+    # Rails.logger.debug(@ran_distance_sum / @event.target_distance)
   end
 
   def json_index  
-    @monthly_data = Running.group("DATE_FORMAT(created_at, '%Y-%m')") # 2023-11 = month, 20 = distance #DBで取得したデータ
-      .select("DATE_FORMAT(created_at, '%Y-%m') AS month, SUM(ran_distance) AS distance") #DBのどのカラムをつかうのか　少し加工している
-      .order("month")
-      .map { |record| [record.month, record.distance] } #map→必要なデータだけを配列に直すメソッド @monthly_data = [["2023-11", 20], ["2023-12", 30].....]
+    @monthly_data = Running.group(:user_id)
+      .joins(:user)
+      # User.joins(:runnings).select(ran_distance)
+      .select("users.nickname AS nickname, SUM(runnings.ran_distance) AS distance") #select取得する
+      .order(:user_id)
+      .map { |record| [record.nickname, record.distance] }#map→必要なデータだけを配列に直すメソッド @monthly_data = [["2023-11", 20], ["2023-12", 30].....]
 
-    distances = @monthly_data.map { |data| data[1] }#byuser_distances_data = @monthly_data.map{}[20,30,40]       #1はdistance# [20, 30, 40, 50, 60]
-    months = @monthly_data.map { |data| data[0] }#user_name_data =  @monthly_data.map{}["test1","test2","test3"]   #0はmonth# ["2023-11", "2023-12", "2024-01", "2024-02", "2024-03"]
-# { "distances": [20, 30, 40, 50, 60], "months": ["2023-11", "2023-12", "2024-01", "2024-02", "2024-03"]}
+    by_user_distances_data = @monthly_data.map { |data| data[1] }#ここでjson名を定義！   
+    user_name_data = @monthly_data.map { |data| data[0] } #0はuser# ["test1","test2","test3"] 
 
-    respond_to do |format|  #
-      format.json { render json: { distances: distances, months: months } } #json: {byuser_distances: byuser_distances_data, user_name: user_name_data }
+    respond_to do |format|
+      format.json { render json: { by_user_distances: by_user_distances_data, user_name: user_name_data } } 
     end
   end
 
   def create
     @running = Running.new(running_params) #ログインしているuserIDを入れる デバイス　ログイン機能→userIDを取得するメソットcurrent.user？
-    if @running.save
+    if @running.save!
       respond_to do |format|
         format.html { redirect_to root_path } #画面を表示
         format.json { render json: { running: @running } } #データを返す
       end
     else
-      Rails.logger.debug
       @runnings = Running.all
       respond_to do |format|
         format.html { render :index, status: :unprocessable_entity }
@@ -39,6 +45,6 @@ class RunningsController < ApplicationController
   private
 
   def running_params
-    params.require(:running).permit(:ran_distance).merge(user_id: current_user.id)
+    params.require(:running).permit(:ran_distance, :event_id).merge(user_id: current_user.id)
   end
 end

@@ -1,5 +1,6 @@
 <h1>RunVision</h1>
 <% if user_signed_in? %>
+<%= current_user.nickname %> <%# ログインユーザーの表示 %>
 ログインしています。
 <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete } %>
 
@@ -8,22 +9,37 @@
 <%=link_to "ログイン", new_user_session_path%>
 <% end %>
 
-<p>今日の日付：◯月◯日</p>
-<p>目標距離：100km</p>
-<p>走った距離：25km</p>
-<p>達成率：25%</p>
-<p>残り日数：30日</p>
-<p>残りの距離：75km</p>
+
+<p>今日の日付：<%= Date.today%></p>
+
+<p>目標名：<%= @event.event_name %> </p> 
+<p>目標距離：<%= @event.target_distance %> km</p> 
+<p> 期間 「<%= @event.start_date %> 〜<%= @event.end_date %> 」<p>
+<p>走った距離：<%= @ran_distance_sum %></p>
+<p>達成率：<%= @rate_achievement%>% </p> <%# (走った合計距離20km / 目標100km ) * 100  %>
+<p>残り日数：<%= @days_remaining%></p>
+<p>残りの距離：<%= @remaining_distance%>km</p><%# →target_distance  -  走った合計距離 %>
+
+
+
+
+
+
+
+
 
 <div style="width: 400px; height: 400px;">
   <canvas id="myChart"></canvas>
 </div>
 
-<p>日付：</p>
+
 <%= form_with(model: @running, url: runnings_path, id: "form") do |form| %>
 <p>走った距離：</p>
   <%= form.number_field :ran_distance, id: "ran-distance" %> <br>km
   <%= form.submit "投稿する", id: "submit" %>
+  <%= form.hidden_field :event_id, id: "event-id", :value => @event.id %> 
+  
+
 <% end %>
 
 <p>走った場所：</p>

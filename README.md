@@ -72,7 +72,7 @@
 
 
 ### Association
-- belongs_to :running
+- has_many :runnings
 
 
 
