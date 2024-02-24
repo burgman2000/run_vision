@@ -1,0 +1,16 @@
+<%=link_to "イベント投稿", new_event_path%>
+<div>
+  <% @events.each do |event| %>
+    <div>
+      <%= event.id %>
+      <%= event.event_name %>
+      <%= event.target_distance %>
+      <%= event.start_date %>
+      <%= event.end_date %>
+      <%= event.commit %>
+    </div>
+  <% end %>
+</div>
+
+<%=link_to "戻る", root_path%>
+
