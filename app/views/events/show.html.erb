@@ -1,0 +1,9 @@
+<p>目標名：<%= @event.event_name %> </p> 
+<p><%= @event.id %></p>
+<p>目標距離：<%= @event.target_distance %></p>
+<p> 期間 「<%= @event.start_date %> 〜<%= @event.end_date %> 」</p>
+<p>意気込み：<%= @event.commit %></p>
+<p>走った距離：<%= @ran_distance_sum %></p>
+
+<%=link_to "イベント一覧に戻る", events_path%>
+

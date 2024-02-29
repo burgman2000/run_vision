@@ -8,9 +8,11 @@
       <%= event.start_date %>
       <%= event.end_date %>
       <%= event.commit %>
+      <%=link_to "詳細", event_path(event.id)%>
+      <%=link_to "編集", edit_event_path(event.id)%>
     </div>
   <% end %>
 </div>
 
-<%=link_to "戻る", root_path%>
+<%=link_to "トップページへ戻る", root_path%>
 
