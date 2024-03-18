@@ -84,5 +84,7 @@ end
 gem 'pry-rails'
 gem 'chartkick'
 gem 'devise'
+gem 'gon'
+gem 'chart-js-rails'
 
 
