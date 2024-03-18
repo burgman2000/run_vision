@@ -1,0 +1,29 @@
+<h1>RunVision</h1>
+<% if user_signed_in? %>
+<%= current_user.nickname %> <%# ログインユーザーの表示 %>
+ログインしています。
+<%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete } %>
+
+<% else %>
+<%=link_to "新規登録", new_user_registration_path%>
+<%=link_to "ログイン", new_user_session_path%>
+<% end %>
+
+
+<%=link_to "イベント投稿", new_event_path%>
+<div>
+  <% @events.each do |event| %>
+    <div>
+      <%= event.id %>
+      <%= event.event_name %>
+      <%= event.target_distance %>
+      <%= event.start_date %>
+      <%= event.end_date %>
+      <%= event.commit %>
+      <%=link_to "詳細", event_path(event.id)%>
+      <%=link_to "編集", edit_event_path(event.id)%>
+    </div>
+  <% end %>
+</div>
+
+

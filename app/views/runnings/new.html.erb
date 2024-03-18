@@ -1,0 +1,13 @@
+<div class="contents row">
+  <div class="container">
+    <h3>投稿する</h3>
+    <%= form_with(model: @running, local: true) do |form| %>
+      <%= form.text_field :ran_distance, placeholder: "ran_distance" %>
+      <%= form.text_field :event_id, placeholder: "" %>
+      <%# <%= form.hidden_field :event_id, value: @event_id %> 
+      <%# <%= form.text_field :event_id, value: @event_id, disabled: true, placeholder: "event_id" %> 
+      <%= form.submit "SEND" %>
+    <% end %>
+  </div>
+</div>
+<%=link_to "イベント一覧ページへ戻る", events_path%>

@@ -1,4 +1,5 @@
 class RunningsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create] #ログインしていないと使えない！
   def index
     @event = Event.order(created_at: :desc).first 
     @runnings = Running.where(event_id: @event.id)
@@ -26,21 +27,41 @@ class RunningsController < ApplicationController
     end
   end
 
-  def create
-    @running = Running.new(running_params) #ログインしているuserIDを入れる デバイス　ログイン機能→userIDを取得するメソットcurrent.user？
-    if @running.save!
-      respond_to do |format|
-        format.html { redirect_to root_path } #画面を表示
-        format.json { render json: { running: @running } } #データを返す
-      end
-    else
-      @runnings = Running.all
-      respond_to do |format|
-        format.html { render :index, status: :unprocessable_entity }
-        format.json { render json: { errors: @running.errors.full_messages }, status: :unprocessable_entity }
-      end
-    end
+  def new
+   @running = Running.new
+   @event_id = params[:event_id]
   end
+
+  def create
+    Running.create(running_params)
+    redirect_to '/'
+  end
+
+  def edit
+    @running = Running.find(params[:id])
+  end
+
+  def update
+    @running = Event.find(params[:id])
+    running.update(running_params)
+    redirect_to running_path(runnning.id)
+  end
+
+  # def create
+  #   @running = Running.new(running_params) #ログインしているuserIDを入れる デバイス　ログイン機能→userIDを取得するメソットcurrent.user？
+  #   if @running.save!
+  #     respond_to do |format|
+  #       format.html { redirect_to root_path } #画面を表示
+  #       format.json { render json: { running: @running } } #データを返す
+  #     end
+  #   else
+  #     @runnings = Running.all
+  #     respond_to do |format|
+  #       format.html { render :index, status: :unprocessable_entity }
+  #       format.json { render json: { errors: @running.errors.full_messages }, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   private
 

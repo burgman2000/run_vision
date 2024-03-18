@@ -1,0 +1,18 @@
+
+<div class="contents row">
+  <div class="container">
+    <h3>投稿する</h3>
+    <%= form_with(model: @event, local: true) do |form| %>
+      <%= form.text_field :event_name, placeholder: "Nickname" %>
+      <%= form.text_field :target_distance, placeholder: "Image Url" %>
+      <%= form.date_field :start_date, placeholder: "Image Url" %>
+      <%= form.date_field :end_date , placeholder: "text", rows: "10" %>
+      <%= form.text_field :commit , placeholder: "text", rows: "10" %>
+      <%= form.submit "SEND" %>
+    <% end %>
+  </div>
+</div>
+<%=link_to "イベント一覧ページへ戻る", events_path%>
+
+
+
