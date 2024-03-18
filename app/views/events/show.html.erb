@@ -1,4 +1,4 @@
-<p>目標名：<%= @event.event_name %> </p> 
+<p>目標名：<%= @event.event_name %> </p>
 <p><%= @event.id %></p>
 <p>目標距離：<%= @event.target_distance %></p>
 <p> 期間 「<%= @event.start_date %> 〜<%= @event.end_date %> 」</p>
@@ -7,7 +7,7 @@
 
 <div>
 <%= Gon::Base.render_data %>
- <canvas id= "myChart"></canvas>
+ <canvas id="myChart"></canvas>
 </div>
 
 <%=link_to "投稿", new_event_running_path(@event.id)%><%# ←rouresの←を見る。２行目を参照 %>

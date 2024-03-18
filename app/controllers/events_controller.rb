@@ -14,9 +14,9 @@ class EventsController < ApplicationController
   end
 
   def show
-    @ran_distance_sum = @event.runnings.sum(:ran_distance)
-    gon.Ran_distance = ::Event.circle_data(@event)
-    gon.Ran_user = ::Event.circle_data(@event)
+    @user_running_data = @event.runnings.group(:user).sum(:ran_distance)
+    gon.nicknames = @user_running_data.map { |user, distance| user.nickname }
+    gon.runnings = @user_running_data.map { |user, distance| distance }
   end
 
   def edit
